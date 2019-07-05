@@ -1,0 +1,9 @@
+<p>
+  students works!
+</p>
+<div>
+  <ul>
+    <li *ngFor="let s of students" [routerLink]="['show-student',s.id]">{{s.firstName}} {{s.lastName}}</li><a [routerLink]="['/update-student,s.id']">deatails</a>
+  </ul>
+</div>
+

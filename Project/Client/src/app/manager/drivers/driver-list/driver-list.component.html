@@ -1,0 +1,8 @@
+<p>
+  driver-list works!
+</p>
+<div>
+  <ul>
+    <li *ngFor="let d of drivers" [routerLink]="['show-driver',d.id]">{{d.firstName}} {{d.lastName}}</li><a [routerLink]="['/update-driver,d.id']">deatails</a>
+  </ul>
+</div>

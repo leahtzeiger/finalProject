@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="accompaniers">
+      <EntityTypeMapping TypeName="DBModel.accompanier">
+        <MappingFragment StoreEntitySet="accompanier">
+          <ScalarProperty Name="accompanierId" ColumnName="accompanierId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="addresses">
+      <EntityTypeMapping TypeName="DBModel.address">
+        <MappingFragment StoreEntitySet="address">
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="fromDate" ColumnName="fromDate" />
+          <ScalarProperty Name="toDate" ColumnName="toDate" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="buses">
+      <EntityTypeMapping TypeName="DBModel.bus">
+        <MappingFragment StoreEntitySet="bus">
+          <ScalarProperty Name="busId" ColumnName="busId" />
+          <ScalarProperty Name="busDescription" ColumnName="busDescription" />
+          <ScalarProperty Name="accompanierId" ColumnName="accompanierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="DBModel.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="DBModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="emergencyPhone1" ColumnName="emergencyPhone1" />
+          <ScalarProperty Name="emergencyPhone2" ColumnName="emergencyPhone2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentInBus">
+      <EntityTypeMapping TypeName="DBModel.StudentInBu">
+        <MappingFragment StoreEntitySet="StudentInBus">
+          <ScalarProperty Name="StudentInBusId" ColumnName="StudentInBusId" />
+          <ScalarProperty Name="busId" ColumnName="busId" />
+          <ScalarProperty Name="studentId" ColumnName="studentId" />
+          <ScalarProperty Name="index" ColumnName="index" />
+          <ScalarProperty Name="didCome" ColumnName="didCome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="loginName" ColumnName="loginName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="DBModel.UserType">
+        <MappingFragment StoreEntitySet="UserType">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

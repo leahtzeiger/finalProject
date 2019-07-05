@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="accompanier">
+    <Key>
+      <PropertyRef Name="accompanierId" />
+    </Key>
+    <Property Name="accompanierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_accompanier_User" FromRole="accompanier" ToRole="User" />
+    <NavigationProperty Name="buses" Relationship="Self.FK_bus_accompanier" FromRole="accompanier" ToRole="bus" />
+  </EntityType>
+  <EntityType Name="address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="lat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="lng" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fromDate" Type="DateTime" Precision="0" />
+    <Property Name="toDate" Type="DateTime" Precision="0" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_address_Student1" FromRole="address" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="bus">
+    <Key>
+      <PropertyRef Name="busId" />
+    </Key>
+    <Property Name="busId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="busDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="accompanierId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="accompanier" Relationship="Self.FK_bus_accompanier" FromRole="bus" ToRole="accompanier" />
+    <NavigationProperty Name="StudentInBus" Relationship="Self.FK_StudentInBus_bus" FromRole="bus" ToRole="StudentInBus" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="lat" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="lng" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="address" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="AddressId" Type="Int32" Nullable="false" />
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Group_User" FromRole="Group" ToRole="User" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_Group" FromRole="Group" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="groupId" Type="Int32" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="emergencyPhone1" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="emergencyPhone2" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="addresses" Relationship="Self.FK_address_Student1" FromRole="Student" ToRole="address" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_Student_Group" FromRole="Student" ToRole="Group" />
+    <NavigationProperty Name="StudentInBus" Relationship="Self.FK_StudentInBus_Student" FromRole="Student" ToRole="StudentInBus" />
+  </EntityType>
+  <EntityType Name="StudentInBu">
+    <Key>
+      <PropertyRef Name="StudentInBusId" />
+    </Key>
+    <Property Name="StudentInBusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="busId" Type="Int32" Nullable="false" />
+    <Property Name="studentId" Type="Int32" Nullable="false" />
+    <Property Name="index" Type="Int32" />
+    <Property Name="didCome" Type="Boolean" />
+    <NavigationProperty Name="bus" Relationship="Self.FK_StudentInBus_bus" FromRole="StudentInBus" ToRole="bus" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentInBus_Student" FromRole="StudentInBus" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="loginName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="accompaniers" Relationship="Self.FK_accompanier_User" FromRole="User" ToRole="accompanier" />
+    <NavigationProperty Name="Groups" Relationship="Self.FK_Group_User" FromRole="User" ToRole="Group" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_accompanier_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="accompanier" Type="Self.accompanier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="accompanier">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bus_accompanier">
+    <End Role="accompanier" Type="Self.accompanier" Multiplicity="1" />
+    <End Role="bus" Type="Self.bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accompanier">
+        <PropertyRef Name="accompanierId" />
+      </Principal>
+      <Dependent Role="bus">
+        <PropertyRef Name="accompanierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_address_Student1">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="address" Type="Self.address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="address">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInBus_bus">
+    <End Role="bus" Type="Self.bus" Multiplicity="1" />
+    <End Role="StudentInBus" Type="Self.StudentInBu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bus">
+        <PropertyRef Name="busId" />
+      </Principal>
+      <Dependent Role="StudentInBus">
+        <PropertyRef Name="busId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="groupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInBus_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentInBus" Type="Self.StudentInBu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="StudentInBus">
+        <PropertyRef Name="studentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserType">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="accompaniers" EntityType="Self.accompanier" />
+    <EntitySet Name="addresses" EntityType="Self.address" />
+    <EntitySet Name="buses" EntityType="Self.bus" />
+    <EntitySet Name="Groups" EntityType="Self.Group" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentInBus" EntityType="Self.StudentInBu" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_accompanier_User" Association="Self.FK_accompanier_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="accompanier" EntitySet="accompaniers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bus_accompanier" Association="Self.FK_bus_accompanier">
+      <End Role="accompanier" EntitySet="accompaniers" />
+      <End Role="bus" EntitySet="buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_address_Student1" Association="Self.FK_address_Student1">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="address" EntitySet="addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInBus_bus" Association="Self.FK_StudentInBus_bus">
+      <End Role="bus" EntitySet="buses" />
+      <End Role="StudentInBus" EntitySet="StudentInBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_User" Association="Self.FK_Group_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Group" Association="Self.FK_Student_Group">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInBus_Student" Association="Self.FK_StudentInBus_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentInBus" EntitySet="StudentInBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

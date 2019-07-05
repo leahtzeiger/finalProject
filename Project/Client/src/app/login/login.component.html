@@ -1,0 +1,19 @@
+<form>
+  <div>
+    <label>Login Name</label>
+    <mat-form-field>
+      <input matInput  type="text" name="loginName" [(ngModel)]="loginName">
+    </mat-form-field>
+
+    <label>Password</label>
+    <input type="text" name="password" [(ngModel)]="password" >
+    
+  </div>
+  <input type="button" value="Enter" (click)="login(loginName,password)">
+ <!-- <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>-->
+  </form>
+  <router-outlet></router-outlet>

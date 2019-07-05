@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="accompanier">
+    <Key>
+      <PropertyRef Name="accompanierId" />
+    </Key>
+    <Property Name="accompanierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+    <Property Name="address" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lat" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="lng" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="fromDate" Type="date" />
+    <Property Name="toDate" Type="date" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bus">
+    <Key>
+      <PropertyRef Name="busId" />
+    </Key>
+    <Property Name="busId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="busDescription" Type="nvarchar" MaxLength="20" />
+    <Property Name="accompanierId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="lat" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="lng" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="address" Type="nvarchar" MaxLength="4" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="AddressId" Type="int" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="Id" Type="nchar" MaxLength="10" />
+    <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="groupId" Type="int" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="15" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="15" />
+    <Property Name="mail" Type="nvarchar" MaxLength="50" />
+    <Property Name="emergencyPhone1" Type="varchar" MaxLength="11" />
+    <Property Name="emergencyPhone2" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="StudentInBus">
+    <Key>
+      <PropertyRef Name="StudentInBusId" />
+    </Key>
+    <Property Name="StudentInBusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="busId" Type="int" Nullable="false" />
+    <Property Name="studentId" Type="int" Nullable="false" />
+    <Property Name="index" Type="int" />
+    <Property Name="didCome" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="loginName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_accompanier_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="accompanier" Type="Self.accompanier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="accompanier">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_address_Student1">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="address" Type="Self.address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="address">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bus_accompanier">
+    <End Role="accompanier" Type="Self.accompanier" Multiplicity="1" />
+    <End Role="bus" Type="Self.bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accompanier">
+        <PropertyRef Name="accompanierId" />
+      </Principal>
+      <Dependent Role="bus">
+        <PropertyRef Name="accompanierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="groupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInBus_bus">
+    <End Role="bus" Type="Self.bus" Multiplicity="1" />
+    <End Role="StudentInBus" Type="Self.StudentInBus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bus">
+        <PropertyRef Name="busId" />
+      </Principal>
+      <Dependent Role="StudentInBus">
+        <PropertyRef Name="busId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInBus_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentInBus" Type="Self.StudentInBus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="StudentInBus">
+        <PropertyRef Name="studentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserType">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBModelStoreContainer">
+    <EntitySet Name="accompanier" EntityType="Self.accompanier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bus" EntityType="Self.bus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentInBus" EntityType="Self.StudentInBus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_accompanier_User" Association="Self.FK_accompanier_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="accompanier" EntitySet="accompanier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_address_Student1" Association="Self.FK_address_Student1">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="address" EntitySet="address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bus_accompanier" Association="Self.FK_bus_accompanier">
+      <End Role="accompanier" EntitySet="accompanier" />
+      <End Role="bus" EntitySet="bus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_User" Association="Self.FK_Group_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Group" Association="Self.FK_Student_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInBus_bus" Association="Self.FK_StudentInBus_bus">
+      <End Role="bus" EntitySet="bus" />
+      <End Role="StudentInBus" EntitySet="StudentInBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInBus_Student" Association="Self.FK_StudentInBus_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentInBus" EntitySet="StudentInBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+      <End Role="UserType" EntitySet="UserType" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

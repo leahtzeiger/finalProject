@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bus">
+    <Key>
+      <PropertyRef Name="busId" />
+    </Key>
+    <Property Name="busId" Type="Int32" Nullable="false" />
+    <Property Name="busDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="accompanierId" Type="Int32" Nullable="false" />
+    <Property Name="numSeats" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_bus_User" FromRole="Bus" ToRole="User" />
+    <NavigationProperty Name="StudentInBus" Relationship="Self.FK_StudentInBus_bus" FromRole="Bus" ToRole="StudentInBus" />
+  </EntityType>
+  <EntityType Name="Station">
+    <Key>
+      <PropertyRef Name="StationId" />
+    </Key>
+    <Property Name="StationId" Type="Int32" Nullable="false" />
+    <Property Name="StationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="lng" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="StudentInStations" Relationship="Self.FK_studentsAddress_stations" FromRole="Stations" ToRole="StudentInStation" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="emergencyPhone1" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="emergencyPhone2" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="StudentInStations" Relationship="Self.FK_address_Student1" FromRole="Student" ToRole="StudentInStation" />
+    <NavigationProperty Name="StudentInBus" Relationship="Self.FK_StudentInBus_Student" FromRole="Student" ToRole="StudentInBus" />
+  </EntityType>
+  <EntityType Name="StudentInBu">
+    <Key>
+      <PropertyRef Name="StudentInBusId" />
+    </Key>
+    <Property Name="StudentInBusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="busId" Type="Int32" Nullable="false" />
+    <Property Name="studentId" Type="Int32" Nullable="false" />
+    <Property Name="index" Type="Int32" />
+    <Property Name="didCome" Type="Boolean" />
+    <NavigationProperty Name="Bus" Relationship="Self.FK_StudentInBus_bus" FromRole="StudentInBus" ToRole="Bus" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentInBus_Student" FromRole="StudentInBus" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="StudentInStation">
+    <Key>
+      <PropertyRef Name="studentInStationId" />
+    </Key>
+    <Property Name="studentInStationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fromDate" Type="DateTime" Precision="0" />
+    <Property Name="statioId" Type="Int32" />
+    <Property Name="toDate" Type="DateTime" Precision="0" />
+    <Property Name="studentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Station" Relationship="Self.FK_studentsAddress_stations" FromRole="StudentInStation" ToRole="Stations" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_address_Student1" FromRole="StudentInStation" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="loginName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_bus_User" FromRole="User" ToRole="Bus" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="Int32" Nullable="false" />
+    <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_bus_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Bus">
+        <PropertyRef Name="accompanierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInBus_bus">
+    <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+    <End Role="StudentInBus" Type="Self.StudentInBu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bus">
+        <PropertyRef Name="busId" />
+      </Principal>
+      <Dependent Role="StudentInBus">
+        <PropertyRef Name="busId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_studentsAddress_stations">
+    <End Role="Stations" Type="Self.Station" Multiplicity="0..1" />
+    <End Role="StudentInStation" Type="Self.StudentInStation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stations">
+        <PropertyRef Name="StationId" />
+      </Principal>
+      <Dependent Role="StudentInStation">
+        <PropertyRef Name="statioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_address_Student1">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentInStation" Type="Self.StudentInStation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="StudentInStation">
+        <PropertyRef Name="studentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInBus_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentInBus" Type="Self.StudentInBu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="StudentInBus">
+        <PropertyRef Name="studentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserType">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Buses" EntityType="Self.Bus" />
+    <EntitySet Name="Stations" EntityType="Self.Station" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentInBus" EntityType="Self.StudentInBu" />
+    <EntitySet Name="StudentInStations" EntityType="Self.StudentInStation" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_bus_User" Association="Self.FK_bus_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Bus" EntitySet="Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInBus_bus" Association="Self.FK_StudentInBus_bus">
+      <End Role="Bus" EntitySet="Buses" />
+      <End Role="StudentInBus" EntitySet="StudentInBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_studentsAddress_stations" Association="Self.FK_studentsAddress_stations">
+      <End Role="Stations" EntitySet="Stations" />
+      <End Role="StudentInStation" EntitySet="StudentInStations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_address_Student1" Association="Self.FK_address_Student1">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentInStation" EntitySet="StudentInStations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInBus_Student" Association="Self.FK_StudentInBus_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentInBus" EntitySet="StudentInBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DbModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DbModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
