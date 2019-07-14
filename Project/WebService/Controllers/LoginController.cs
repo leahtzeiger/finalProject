@@ -10,10 +10,12 @@ using System.Web.Http.Cors;
 
 namespace WebService.Controllers
 {
+    [RoutePrefix("api/user")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
         [HttpPost]
+        [Route("login")]
         public HttpResponseMessage login(string loginName, string password)
         {
             DTOLoginResponse response = UserService.Login(loginName, password);

@@ -17,7 +17,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(request: loginRequest) {
-    return this.http.post(environment.api + '/Login/login', request)
+    return this.http.post(environment.api + '/User/login', request)
       .pipe(
         map((response: loginResponse) => {
           this.userId = response.userId;

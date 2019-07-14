@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ChooseBusComponent } from './choose-bus/choose-bus.component';
+import { ChooseBusComponent } from '../components/accompaniers/choose-bus/choose-bus.component';
 
 const routes: Routes = [
-  {path:'',component:ChooseBusComponent}
+  {path:'',redirectTo:'chooseBus',pathMatch:'full'},
+  {path:'chooseBus',component:ChooseBusComponent},
 ];
 
 @NgModule({

@@ -1,13 +1,13 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { ManagerModule } from './manager/manager.module';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-    {path:'',component:LoginComponent},
-    {path:'manager',loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)},
-    {path:'accompanier',loadChildren: () => import('./accompanier/accompanier.module').then(mod => mod.AccompanierModule)},
-    {path:'driver',loadChildren: () => import('./driver/driver.module').then(mod => mod.DriverModule)}
+  
+    {path:'',redirectTo:'login',pathMatch:'full'},
+    {path:'login',component:LoginComponent},
+    {path:'manager',loadChildren: () => import('./modules/manager.module').then(mod => mod.ManagerModule)},
+    {path:'accompanier',loadChildren: () => import('./modules/accompanier.module').then(mod => mod.AccompanierModule)}
 
 ];
 
@@ -15,4 +15,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
