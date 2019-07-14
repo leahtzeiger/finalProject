@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ManagerService } from '../../../shared/services/manager.service';
-import { accompanier } from 'src/app/shared/models/accompanier.model';
+import { ManagerService } from '../../../services/manager.service';
+import { accompanier } from '../../../models/accompanier.model';
 
 @Component({
   selector: 'app-add-accompanier',

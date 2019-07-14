@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="DTOArrivingChild.cs" />
     <Compile Include="DTOBus.cs" />
+    <Compile Include="DTOLoginRequest.cs" />
     <Compile Include="DTOPath.cs" />
     <Compile Include="DTOStaion.cs" />
     <Compile Include="DTOStudent.cs" />

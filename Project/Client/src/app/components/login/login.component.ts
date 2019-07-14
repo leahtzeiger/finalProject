@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { user, userModule, loginRequest } from '../shared/models/user.model'
-import { UserService } from '../shared/services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { loginRequest, userModule } from 'src/app/models/user.model';
 
 
 

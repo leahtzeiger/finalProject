@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { accompanier } from 'src/app/shared/models/accompanier.model';
-import { ManagerService } from 'src/app/shared/services/manager.service';
+import { accompanier } from '../../../models/accompanier.model';
+import { ManagerService } from '../../../services/manager.service';
 import { Router } from '@angular/router';
 
 @Component({

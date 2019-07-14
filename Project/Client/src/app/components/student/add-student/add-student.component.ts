@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { student } from '../../shared/models/student.model';
-import { StudentService } from '../../shared/services/student.service';
+import {StudentService}from '../../../services/student.service';
+import {student}from '../../../models/student.model'
+
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',

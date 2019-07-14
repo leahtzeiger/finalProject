@@ -1,8 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { student } from 'src/app/shared/models/student.model';
 import { ActivatedRoute } from '@angular/router';
-import { StudentService } from '../../shared/services/student.service';
-
+import {student}from '../../../models/student.model';
+import {StudentService}from '../../../services/student.service';
 @Component({
   selector: 'app-show-student',
   templateUrl: './show-student.component.html',

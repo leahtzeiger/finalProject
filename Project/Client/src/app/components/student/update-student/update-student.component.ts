@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { student } from 'src/app/shared/models/student.model';
-import { StudentService } from '../../shared/services/student.service';
 import { ActivatedRoute } from '@angular/router';
+import{student}from'../../../models/student.model';
+import{StudentService}from'../../../services/student.service';
 
 @Component({
   selector: 'app-update-student',
