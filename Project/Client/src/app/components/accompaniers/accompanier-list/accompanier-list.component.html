@@ -1,8 +1,13 @@
-<p>
-  accompanier-list works!
-</p>
 <div>
-  <ul>
-    <li *ngFor="let a of accompaniers" [routerLink]="['show-accompanier',a.id]">{{a.firstName}} {{a.lastName}}</li><a [routerLink]="['/update-accompanier,a.id']">deatails</a>
+  <ul *ngFor="let accompanier of accompaniers">
+    <li [routerLink]="['show-accompanier',accompanier.id]">
+      {{a.firstName}} {{a.lastName}}
+    </li>
+    <a [routerLink]="['/accompanier-details,accompanier.id']">deatails</a>
+    <button (click)="deleteAccompanier(accompanier.id)">delete</button>
   </ul>
 </div>
+<div>
+  <button (click)="routeToAddAccompanier()">add accompanier</button>
+</div>
+<router-outlet></router-outlet>

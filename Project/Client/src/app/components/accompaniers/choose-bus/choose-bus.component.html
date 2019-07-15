@@ -1,3 +1,8 @@
-<p>
-  choose-bus works!
-</p>
+<div>
+  <ul *ngFor="let bus of buses">
+    <li>
+      {{bus.busId}}
+      {{bus.busDescription}}
+    </li>
+  </ul>
+</div>

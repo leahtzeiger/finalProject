@@ -11,8 +11,7 @@ import { AddAccompanierComponent } from '../components/accompaniers/add-accompan
 import { ShowStudentComponent } from '../components/student/show-student/show-student.component';
 import { UpdateStudentComponent } from '../components/student/update-student/update-student.component';
 import { AccompanierListComponent } from '../components/accompaniers/accompanier-list/accompanier-list.component';
-import { ShowAcompanierComponent } from '../components/accompaniers/show-acompanier/show-acompanier.component';
-import { UpdateAccompanierComponent } from '../components/accompaniers/update-accompanier/update-accompanier.component';
+import { AccompanierDetailsComponent } from '../components/accompaniers/accompanier-details/accompanier-details.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,8 +29,7 @@ import { UpdateAccompanierComponent } from '../components/accompaniers/update-ac
       ShowStudentComponent,
       UpdateStudentComponent,
       AccompanierListComponent,
-      ShowAcompanierComponent,
-      UpdateAccompanierComponent
+      AccompanierDetailsComponent
     ]
 })
 export class ManagerModule { }

@@ -14,16 +14,19 @@ export class LoginComponent implements OnInit {
 
   loginName: string;
   password: string;
+
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  login(loginName:string,password:string): void {
+  login(loginName: string, password: string): void {
+
     const request: loginRequest = {
       loginName,
       password
     };
+
     this.userService.login(request)
       .subscribe((moduleId: userModule) => {
         if (moduleId == userModule.Manager)
@@ -35,4 +38,5 @@ export class LoginComponent implements OnInit {
       }
       );
   }
+
 }

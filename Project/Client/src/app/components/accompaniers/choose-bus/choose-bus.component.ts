@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AccompanierService } from 'src/app/services/accompanier.service';
+import { bus } from 'src/app/models/bus.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-choose-bus',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChooseBusComponent implements OnInit {
 
-  constructor() { }
+  buses:bus[];
+
+  constructor(private accomapnierService:AccompanierService,private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getAccompanierBuses(+this.route.snapshot.paramMap.get('id'));
   }
+
+  getAccompanierBuses(id:number){
+    this.accomapnierService.getAccompanierBuses(id).subscribe((res:bus[])=>{
+      this.buses=res
+    })
+  }
+
 
 }
