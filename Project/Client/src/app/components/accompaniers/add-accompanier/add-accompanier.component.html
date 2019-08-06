@@ -1,18 +1,32 @@
 <form #accompanierForm="ngForm"(ngSubmit)="addAccompanier(); accompanierForm.reset()"  >
- 
-  <label>loginName</label><input type="text" name="loginName" [(ngModel)]="currentAccompanier.loginName">
-  <br/> <br/>
+ <mat-form-field>
+  <!--<label>loginName</label>-->
+  <input type="text" matInput placeholder="loginName" name="loginName" [(ngModel)]="currentAccompanier.loginName">
+</mat-form-field>
 
-  <label>password</label><input type="text" name="firstName" [(ngModel)]="currentAccompanier.password">
-  <br/> <br/>
+<br/> <br/>
+<mat-form-field>
+  <!--<label>password</label>-->
+  <input type="text" matInput placeholder="password" name="firstName" [(ngModel)]="currentAccompanier.password">
+ </mat-form-field> 
 
-  <label>first name</label><input type="text" name="firstName" [(ngModel)]="currentAccompanier.firstName">
+ <br/> <br/>
+ <mat-form-field>
+  <!--<label>first name</label>-->
+  <input type="text" matInput placeholder="first name" name="firstName" [(ngModel)]="currentAccompanier.firstName">
+  </mat-form-field>
+
   <br/> <br/> 
+  <mat-form-field>
+  <!--<label>last name</label>-->
+  <input type="text" matInput placeholder="last name" name="lastName" [(ngModel)]="currentAccompanier.lastName">
+  </mat-form-field>
 
-  <label>last name</label><input type="text" name="lastName" [(ngModel)]="currentAccompanier.lastName">
-  <br/> <br/> 
- 
-  <label>phone</label> <input type="text" name="tel1"  [(ngModel)]="currentAccompanier.phone">
+   <br/> <br/> 
+  <mat-form-field>
+  <!--<label>phone</label>--> 
+  <input type="text" matInput placeholder="phone" name="tel1"  [(ngModel)]="currentAccompanier.phone">
+  </mat-form-field>
   <br/> <br/>
  
   <input type="submit" value="submit" >

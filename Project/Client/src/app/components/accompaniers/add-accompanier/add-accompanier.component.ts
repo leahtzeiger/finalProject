@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ManagerService } from '../../../services/manager.service';
 import { accompanier } from '../../../models/accompanier.model';
 import { AccompanierService } from 'src/app/services/accompanier.service';
 
@@ -11,8 +10,19 @@ import { AccompanierService } from 'src/app/services/accompanier.service';
 export class AddAccompanierComponent implements OnInit {
 
   currentAccompanier: accompanier;
+<<<<<<< HEAD
 
   constructor(private accompanierService: AccompanierService) {
+=======
+  constructor(private accompanierService:AccompanierService) {
+    this.currentAccompanier = <accompanier>{};
+  }
+  addaccompanier() {
+    this.accompanierService.addAccompanier(this.currentAccompanier)
+      .subscribe(a => {
+        console.log(a.valueOf());
+      });
+>>>>>>> 9a5c2b8149076f895f5d714ee25d8d2aa936a943
   }
 
   ngOnInit() {

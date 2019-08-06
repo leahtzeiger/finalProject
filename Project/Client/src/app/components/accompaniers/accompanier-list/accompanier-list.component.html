@@ -1,10 +1,18 @@
 <div>
+<<<<<<< HEAD
   <ul *ngFor="let accompanier of accompaniers">
     <li [routerLink]="['show-accompanier',accompanier.id]">
       {{a.firstName}} {{a.lastName}}
     </li>
     <a [routerLink]="['/accompanier-details,accompanier.id']">deatails</a>
     <button (click)="deleteAccompanier(accompanier.id)">delete</button>
+=======
+  <ul>
+
+    <li *ngFor="let a of accompaniers" [routerLink]="['show-accompanier',a.id]">{{a.firstName}} {{a.lastName}}</li><a [routerLink]="['/update-accompanier,a.id']">deatails</a>
+    <li *ngFor="let a of accompaniers" [routerLink]="['show-accompanier',a.id]">{{a.firstName}} {{a.lastName}}</li><a [routerLink]="['/update-accompanier,a.id']">deatails</a>
+    <li *ngFor="let a of accompaniers" [routerLink]="['show-accompanier',a.id]">{{a.firstName}} {{a.lastName}}</li><a [routerLink]="['/update-accompanier,a.id']">deatails</a>
+>>>>>>> 9a5c2b8149076f895f5d714ee25d8d2aa936a943
   </ul>
 </div>
 <div>

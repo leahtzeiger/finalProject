@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { retryWhen, map, mergeMap } from 'rxjs/operators';
 import { resolve, reject } from 'q';
 import { loginRequest, loginResponse, userModule } from '../models/user.model';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
+// import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -11,9 +11,15 @@ import { AccompanierService } from 'src/app/services/accompanier.service';
 
 export class AccompanierListComponent implements OnInit {
 
+<<<<<<< HEAD
   accompaniers: accompanier[];
 
   constructor(private accompanierService: AccompanierService, private router: Router) {
+=======
+  accompaniers:accompanier[]=[];
+  constructor(private accompanierService:AccompanierService,private Router:Router) {
+   this.accompanierService.getAccompaniers().subscribe(accompanier=>this.accompaniers=accompanier);
+>>>>>>> 9a5c2b8149076f895f5d714ee25d8d2aa936a943
   }
 
   ngOnInit() {

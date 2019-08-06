@@ -6,3 +6,11 @@ export interface student {
     phone2?: string;
     email?: string;
 }
+export interface changeStutionRequest{
+    studentId:number;
+    stutionId:number;
+}
+export interface changeBusRequest{
+    studentId:number;
+    BusId:number;
+}
