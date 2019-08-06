@@ -3,6 +3,9 @@
 </p>
 <div>
   <ul>
+
+    <li *ngFor="let a of accompaniers" [routerLink]="['show-accompanier',a.id]">{{a.firstName}} {{a.lastName}}</li><a [routerLink]="['/update-accompanier,a.id']">deatails</a>
+    <li *ngFor="let a of accompaniers" [routerLink]="['show-accompanier',a.id]">{{a.firstName}} {{a.lastName}}</li><a [routerLink]="['/update-accompanier,a.id']">deatails</a>
     <li *ngFor="let a of accompaniers" [routerLink]="['show-accompanier',a.id]">{{a.firstName}} {{a.lastName}}</li><a [routerLink]="['/update-accompanier,a.id']">deatails</a>
   </ul>
 </div>
