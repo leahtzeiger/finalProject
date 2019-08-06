@@ -13,13 +13,13 @@ export class ManagerService {
   getDrivers() {
     return this.http.get<driver[]>(environment.api + "/driver/getDriver");
   }
-
+  getDriverById(driverId:number) {
+    return this.http.get<driver>(environment.api + "/driver/getDriver?id="+driverId);
+  }
+  updateDriver(currentDriver: driver){
+    return this.http.post(environment.api+'/driver/update',{currentDriver})
+  }
   constructor(private http: HttpClient) { }
   
-  addAccompanier(a: accompanier) {
-    return this.http.post(environment.api + "/accompanier/addAccompanier", { a });
-  }
-  getAccompaniers() {
-    return this.http.get<accompanier[]>(environment.api + "/accompanier/getAccompanier");
-  }
+ 
 }
